@@ -7,6 +7,11 @@
 
 </head>
 <body>
+
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+  
 <!-- partial:index.partial.html -->
 <div class="container">
   <div class="night"></div>
@@ -444,6 +449,28 @@
         }
       }, 100);
     });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    setTimeout(function() {
+      const container = document.querySelector('.container');
+      if (container) {
+        container.classList.remove('container');
+      }
+    }, 100);
+
+    // 🎵 Play music on first tap
+    const music = document.getElementById("bgMusic");
+
+    function startMusic() {
+      music.play();
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
+  });
   </script>
 
 </body>
