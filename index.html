@@ -2,15 +2,13 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Blue Flower</title>
+  <title>Special Flower</title>
   <link rel="stylesheet" href="./style.css">
 
 </head>
 <body>
 
-  <audio id="bgMusic" loop>
-    <source src="song.mp3" type="audio/mpeg">
-  </audio>
+<audio id="backsound" src="song.mp3" loop playsinline preload="auto"></audio
   
 <!-- partial:index.partial.html -->
 <div class="container">
@@ -450,32 +448,15 @@
       }, 100);
     });
 
-  document.addEventListener('DOMContentLoaded', function() {
+    
+const audio = document.getElementById("backsound");
 
-    setTimeout(function() {
-      const container = document.querySelector('.container');
-      if (container) {
-        container.classList.remove('container');
-      }
-    }, 100);
+function enableSound() {
+  audio.play().catch(() => {});
+}
 
-    const music = document.getElementById("bgMusic");
-    let started = false;
-
-    function startMusic() {
-      if (started) return;
-      started = true;
-
-      music.play().then(() => {
-        console.log("Music started");
-      }).catch(err => {
-        console.log("Autoplay blocked:", err);
-      });
-    }
-
-    document.body.addEventListener("click", startMusic);
-    document.body.addEventListener("touchstart", startMusic);
-  });
+document.addEventListener("click", enableSound, { once: true });
+document.addEventListener("touchstart", enableSound, { once: true });
   </script>
 
 </body>
