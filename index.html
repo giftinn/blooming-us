@@ -451,7 +451,7 @@
     });
 
   document.addEventListener('DOMContentLoaded', function() {
-    
+
     setTimeout(function() {
       const container = document.querySelector('.container');
       if (container) {
@@ -459,17 +459,22 @@
       }
     }, 100);
 
-    // 🎵 Play music on first tap
     const music = document.getElementById("bgMusic");
+    let started = false;
 
     function startMusic() {
-      music.play();
-      document.removeEventListener("click", startMusic);
-      document.removeEventListener("touchstart", startMusic);
+      if (started) return;
+      started = true;
+
+      music.play().then(() => {
+        console.log("Music started");
+      }).catch(err => {
+        console.log("Autoplay blocked:", err);
+      });
     }
 
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
+    document.body.addEventListener("click", startMusic);
+    document.body.addEventListener("touchstart", startMusic);
   });
   </script>
 
